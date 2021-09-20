@@ -38,23 +38,7 @@ public class BoardListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		PrintWriter out = response.getWriter();
-		/*
-		 * 총 페이지
-		 * 현재 눌려진 페이지 --> (1 2 3)인지 (4 5 6)인지
-		 * start 페이지
-		 * end 페이지
-		 * 
-		 * 페이징 처리를 위해 알아야 할것
-		 * 1. 총 글 개수 --> select count(bno) from board 이용
-		 * 페이징 처리를 위해 정해야 할것
-		 * 1. 한 페이지에 나타내고 싶은 글의 개수
-		 * 2. << <1 2 3 4 5 6 7 8 9 10> >>
-		 * 위와 같은 페이징 단위(몇 개 단위로 움직일 것인가.)
-		 * 
-		 * 오늘은
-		 * 한 페이지에 나타내고 싶은 글의 개수 = 5개
-		 * 페이징 단위 = 3
-		 */
+
 		final int PAGE_SIZE = 15; // 한 페이지 당 보여질 글 수
 		final int PAGE_BLOCK = 3; // 한 화면에 나타날 페이지 링크 수
 		// 헷갈려서 내가 작성
