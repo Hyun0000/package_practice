@@ -42,6 +42,7 @@ public class BoardControl extends HttpServlet {
 	
 	// board 관련 페이지를 전체적으로 관리하는 method
 	// URL에 'board/~~~' 값이 들어오면 아래의 method로 url 값이 들어오게 된다.
+	// 따라서 기존 Servlet 파일들에 있던 URL 값에도 앞에 '/board'를 추가해야한다.
 	protected void actionDo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{ // 오류가 발생하면 나도 throws 하겠다.
 		response.setContentType("text/html; charset = UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -49,17 +50,19 @@ public class BoardControl extends HttpServlet {
 		
 		String uri = request.getRequestURI();
 		// uri 값을 알려준다. --> /newmvc/board/BoardList
-		// newmvc = 현재 프로젝트의 context-root
+		// (newmvc = 현재 프로젝트의 context-root)
+		// cf) URL은 'http:// ~' 부분부터 다 있는 것이다.
 		String contextPath = request.getContextPath();
 		// 현재 프로젝트의 context-root를 알려준다. --> /newmvc
 		String com = uri.substring(contextPath.length());
 		// uri값에서 contextPath를 뺀 값   by substring() method
 		// /newmvc/board/BoardList - /newmvc = /board/BoardList
+		// contextpath.length() 길이 다음부터의 문자만 남는다.
 		
 		System.out.println("uri :" + uri);
 		System.out.println("contextpath :" + contextPath);
 		System.out.println("com :" + com);
-		// log찍기
+		// log찍기 ex)
 		// uri :/newmvc/board/BoardList
 		// contextpath :/newmvc
 		// com :/board/BoardList
@@ -78,19 +81,11 @@ public class BoardControl extends HttpServlet {
 			BoardContentViewCommand boardContentViewCommand = new BoardContentViewCommand();
 			boardContentViewCommand.execute(request, response);
 			viewPage = "/WEB-INF/board/detailboard.jsp";
-		} 
+			
+		} else if (com.equals("/board/applpe")) {
+			viewPage = "/WEB-INF/board/template.jsp";
+		}
+
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

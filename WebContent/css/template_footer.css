@@ -1,0 +1,10 @@
+@charset "UTF-8";
+footer {
+    width: 100%;
+    background-color: rgb(230, 230, 230);
+}
+
+#foot {
+    text-align: center;
+    padding: 10px 0 ;
+}
