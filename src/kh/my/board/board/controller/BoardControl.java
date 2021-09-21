@@ -55,7 +55,7 @@ public class BoardControl extends HttpServlet {
 		String contextPath = request.getContextPath();
 		// 현재 프로젝트의 context-root를 알려준다. --> /newmvc
 		String com = uri.substring(contextPath.length());
-		// uri값에서 contextPath를 뺀 값   by substring() method
+		// uri값에서 contextPath를 뺀 값  by substring() method
 		// /newmvc/board/BoardList - /newmvc = /board/BoardList
 		// contextpath.length() 길이 다음부터의 문자만 남는다.
 		
@@ -73,8 +73,10 @@ public class BoardControl extends HttpServlet {
 		if (com.equals("/board/BoardList")) {
 			// BoardList는 DB에 갖다와야 결과물을 화면에 뿌릴 수 있으므로 DB 관련 코드가 있어야한다.
 			// DB에 갖다오는 코드
+			// 만약 DB 관련 코드가 간단하면 굳이 (boardListCommand) 이런 파일을 만들 필요없이 그냥 여기다 작성하면 된다.
 			BoardListCommand boardListCommand = new BoardListCommand();
 			boardListCommand.execute(request, response);
+			// viewpage의 위치를 WEB-INF 폴더 안으로 옮겼으므로 아래와 같이 경로를 적는다.
 			viewPage = "/WEB-INF/board/boardlist.jsp";
 			
 		} else if (com.equals("/board/boardcontent")) {
@@ -82,10 +84,14 @@ public class BoardControl extends HttpServlet {
 			boardContentViewCommand.execute(request, response);
 			viewPage = "/WEB-INF/board/detailboard.jsp";
 			
-		} else if (com.equals("/board/applpe")) {
-			viewPage = "/WEB-INF/board/template.jsp";
+		} else if (com.equals("/board/boardWriteview")) {
+			viewPage = "/WEB-INF/board/boardwrite.jsp";
+			
+		} else if (com.equals("/board/boardrewrite")) {
+			new BoardWriteCommand().execute(request, response);
+			response.sendRedirect("BoardList");
+			return;
 		}
-
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 }

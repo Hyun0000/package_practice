@@ -16,7 +16,7 @@ public class BoardListCommand implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		final int PAGE_SIZE = 15; // 한 페이지 당 보여질 글 수
+		final int PAGE_SIZE = 5; // 한 페이지 당 보여질 글 수
 		final int PAGE_BLOCK = 3; // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0 ; // 총 글 개수
 		int pageCount = 0; // 총 페이지 수

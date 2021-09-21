@@ -31,6 +31,5 @@ public class BoardWriteCommand implements Command {
 		
 		Board board = new Board(originVo.getBno(), title, content, writer, originVo.getBref(), originVo.getBreLevel(), originVo.getBreStep());
 		int result = new BoardService().insertBoard(board);
-		response.sendRedirect("BoardList");
 	}
 }
